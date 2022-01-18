@@ -18,6 +18,6 @@ html, css, js, React.js, использование API unsplash
 
 
 
-_Ссылка на GitHub Pages: _
+**Ссылка на GitHub Pages:**
 
 https://nadezhda-yarovaya.github.io/search-pics-unspl/
