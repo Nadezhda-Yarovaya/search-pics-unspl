@@ -12,7 +12,6 @@ code {
     monospace;
 }
 
-
 .app {
   display: flex;
   justify-content: center;
@@ -100,6 +99,7 @@ code {
   object-position: center;
 
 }
+
 .photo-image {margin: 30px 0;
 }
 
