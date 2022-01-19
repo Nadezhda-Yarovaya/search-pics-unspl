@@ -1,16 +1,14 @@
 import { Link } from 'react-router-dom';
-import {useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
 export const Photo = ({ photos }) => {
 
-    console.log('in photo');
-    const {id} = useParams();
-    console.log(id);
+    const { id } = useParams();
 
-    const photo = photos.find(item => item.id === id); /* см возвратит без ретурна */
-    if(!photo ) {
+    const photo = photos.find(item => item.id === id);
+    if (!photo) {
         return (
-<><p>nothing</p></>
+            <><p>Photo not found</p></>
         );
     }
 
@@ -18,8 +16,8 @@ export const Photo = ({ photos }) => {
 
     return (
         <div className="photo">{" "}
-            <Link className="photo-goback" to="/">{" "}
-               Go Back {" "}
+            <Link className="photo-goback" to="/search-pics-unspl">{" "}
+                Go Back {" "}
             </Link>{" "}
             <img className="photo-image" src={src} alt={title} />{" "}
             <p className="photo-title">{title}</p>{" "}

@@ -26,8 +26,7 @@ function App() {
     setIsLoading(true);
     api.search(searchQuery)
     .then(data => {
-      console.log(data);
-      const cards = data.results.map(item => {
+            const cards = data.results.map(item => {
         return {
           id: item.id,
           src: item.urls.regular,
@@ -36,7 +35,6 @@ function App() {
           subtitle: item.description
         };
       });      
-      console.log(cards);
       setCards(cards);
     }).catch(err => console.log(err))
     .finally(() => {
@@ -46,23 +44,23 @@ function App() {
   }
 
  } 
+ /*
  const handleInputChange = (e) => {
    setSearchQuery(e.target.value);
  };
-
+*/
  const onSubmit = (value) => {
    setSearchQuery(value);
    //e.preventDefault();
    //handleRequest(); больше не будет это вызывать
    //console.log('sfsdfsdf');
-
  }
 
   return (    
     <Switch>
-    <Route path="/" exact><Main onSubmit={onSubmit} isLoading={isLoading} cards={cards}/></Route>
-    <Route path="/photos/:id"><Photo photos={cards} /></Route>
-    <Route path="*">404 not found</Route>       
+    <Route path="/search-pics-unspl" exact><Main onSubmit={onSubmit} isLoading={isLoading} cards={cards}/></Route>
+    <Route path="/search-pics-unspl/photos/:id"><Photo photos={cards} /></Route>
+    <Route path="/search-pics-unspl/*">404 not found</Route>       
     </Switch>
 );
 }

@@ -1,7 +1,8 @@
+import './spinner.css';
+
 const Spinner = (props) => {
     return (
-        <div className="spinner">
-        </div>
+        <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
     );
 }
 
