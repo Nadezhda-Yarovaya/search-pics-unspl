@@ -14,7 +14,7 @@ html, css, js, React.js, использование API unsplash, BrowserRouter
 
 ***Ссылки:***
 \
-[gh-pages]https://nadezhda-yarovaya.github.io/search-pics-unspl/)
+[gh-pages](https://nadezhda-yarovaya.github.io/search-pics-unspl/)
 \
 \
 **План по доработке :**
