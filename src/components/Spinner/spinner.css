@@ -1,11 +1,11 @@
-.spinner{
+.spinner {
   display: inline-block;
   position: relative;
   width: 80px;
   height: 80px;
 }
 
-.spinner__section{
+.spinner__section {
   animation: spinner 1.3s cubic-bezier(0.75, 0.2, 0.5, 0.92) infinite;
   transform-origin: 40px 40px;
 }
