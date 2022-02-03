@@ -4,6 +4,12 @@ class Api {
         this._apiKey = apiKey;
     }
 
+    static getResponse(res) { /* статичная функция */
+       return (res.status === 200 || res.status === 201) 
+       ? res.json()
+       : Promise.reject('Ошибка: ' + res.status);
+    }
+
     search(searchQuery) {
         return fetch(`${this._baseUrl}/search/photos?query=${searchQuery}`,
         {
@@ -11,8 +17,31 @@ class Api {
             Authorization: `Client-ID ${this._apiKey}`
 
         }
-    }).then(res => res.ok ? res.json() : Promise.reject(res.status));
+    }).then(Api.getResponse)
+    .then(({results}) => results.map(Api.transformFotoData));
     } /*close search function*/
+
+    static transformFotoData(item) {
+        console.log(item.results);
+        return {
+            id: item.id,
+            src: item.urls.regular,
+            alt: item.alt_description,
+            title: item.user.name,
+            subtitle: item.description
+          };
+    }
+
+getPhotoById(id) {
+    return fetch(`${this._baseUrl}/search/photos/${id}`,
+    {
+    headers: {
+        Authorization: `Client-ID ${this._apiKey}`
+
+    }
+}).then(Api.getResponse)
+.then(({results}) => results.map(Api.transformFotoData));
+} /*close search function*/
 } /* close class*/
 
 const config = {

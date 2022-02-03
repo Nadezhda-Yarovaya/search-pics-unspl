@@ -1,7 +1,10 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { CardContext } from '../../context/CardContext';
 
-export const Photo = ({ photos }) => {
+export const Photo = () => {
+    const photos=useContext(CardContext);
 
     const { id } = useParams();
 

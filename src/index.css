@@ -84,11 +84,6 @@ code {
   cursor: pointer
 }
 
-.spinner {
-  background-color: aqua;
-  width:200px;
-  height: 200px;
-}
 
 .photo {
   display: flex; 

@@ -6,44 +6,39 @@ import {useEffect} from "react";
 import {useState} from "react";
 import Main from '../Main/Main';
 import {Photo} from '../Photo/Photo';
+import {CardContext} from '../../context/CardContext.js';
 
 function App() {
-  const [searchQuery, setSearchQuery] = useState('cats');
+  const [searchQuery, setSearchQuery] = useState('beach');
   /* тоже самое что дестр. мас
   const searchQuery = arr[0];
   const setSearchQuery = arr[1]; это функция 
+  01:31 passed
   */
   const [cards,setCards] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   /* в самом конце выполняется, как event loop очередь событий */
   useEffect(() => {
-    handleRequest();
+    const handleRequest = () => {   
+      if (searchQuery !== '') {
+        setIsLoading(true);
+
+        api.search(searchQuery)
+        .then(data => {
+          setCards(data);
+        }).catch(err => console.log(err))
+        .finally(() => {
+          setIsLoading(false);
+        });
+       
+      }
+    
+     } 
+    handleRequest(); /* только тут эта функция, тут и вызывается */
   }, [searchQuery]); /* когда поставила запрос срабатывает. эффект отслеживает изменение запроса. я его в функции поменяла, поэтому и эффект поменялся */
   
 
- const handleRequest = () => {   
-  if (searchQuery !== '') {
-    setIsLoading(true);
-    api.search(searchQuery)
-    .then(data => {
-            const cards = data.results.map(item => {
-        return {
-          id: item.id,
-          src: item.urls.regular,
-          alt: item.alt_description,
-          title: item.user.name,
-          subtitle: item.description
-        };
-      });      
-      setCards(cards);
-    }).catch(err => console.log(err))
-    .finally(() => {
-      setIsLoading(false);
-    });
-   
-  }
 
- } 
  /*
  const handleInputChange = (e) => {
    setSearchQuery(e.target.value);
@@ -57,11 +52,14 @@ function App() {
  }
 
   return (    
+    <CardContext.Provider value={cards}>
     <Switch>
-    <Route path="/search-pics-unspl" exact><Main onSubmit={onSubmit} isLoading={isLoading} cards={cards}/></Route>
+    <Route path="/search-pics-unspl" exact><Main onSubmit={onSubmit} isLoading={isLoading} cards={cards}
+    initialValue={searchQuery}/></Route>
     <Route path="/search-pics-unspl/photos/:id"><Photo photos={cards} /></Route>
     <Route path="/search-pics-unspl/*">404 not found</Route>       
     </Switch>
+    </CardContext.Provider>
 );
 }
 
