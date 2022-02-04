@@ -1,7 +1,7 @@
 import logo from '../../logo.svg';
 import './App.css';
 import api from '../../utils/Api.js';
-import {Link, Switch, Route} from 'react-router-dom';
+import { Switch, Route} from 'react-router-dom';
 import {useEffect} from "react";
 import {useState} from "react";
 import Main from '../Main/Main';
@@ -9,6 +9,9 @@ import {Photo} from '../Photo/Photo';
 import {CardContext} from '../../context/CardContext.js';
 
 function App() {
+  /* дом. задание сделать точно также как в photo вызов из уже готовых хуков
+  а также в адресную строку выводить и забирать поисковой запрос через history location и т.д. */
+  
   const [searchQuery, setSearchQuery] = useState('beach');
   /* тоже самое что дестр. мас
   const searchQuery = arr[0];
@@ -22,17 +25,16 @@ function App() {
     const handleRequest = () => {   
       if (searchQuery !== '') {
         setIsLoading(true);
-
         api.search(searchQuery)
         .then(data => {
+          //console.log('data:' + Object.entries(data[0]));
           setCards(data);
         }).catch(err => console.log(err))
         .finally(() => {
           setIsLoading(false);
         });
        
-      }
-    
+      }    
      } 
     handleRequest(); /* только тут эта функция, тут и вызывается */
   }, [searchQuery]); /* когда поставила запрос срабатывает. эффект отслеживает изменение запроса. я его в функции поменяла, поэтому и эффект поменялся */
@@ -54,10 +56,10 @@ function App() {
   return (    
     <CardContext.Provider value={cards}>
     <Switch>
-    <Route path="/search-pics-unspl" exact><Main onSubmit={onSubmit} isLoading={isLoading} cards={cards}
+    <Route path="/" exact><Main onSubmit={onSubmit} isLoading={isLoading} cards={cards}
     initialValue={searchQuery}/></Route>
-    <Route path="/search-pics-unspl/photos/:id"><Photo photos={cards} /></Route>
-    <Route path="/search-pics-unspl/*">404 not found</Route>       
+    <Route path="/photos/:id"><Photo photos={cards} /></Route>
+    <Route path="/*">404 not found</Route>       
     </Switch>
     </CardContext.Provider>
 );

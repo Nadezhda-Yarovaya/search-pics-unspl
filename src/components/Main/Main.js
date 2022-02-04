@@ -12,6 +12,7 @@ export const Main = ({
 }) => {
   const [value, setValue] = useState(initialValue);
   const cards=useContext(CardContext);
+  //console.log(cards);
 
   const handleInputChange = (e) => {
     setValue(e.target.value);
