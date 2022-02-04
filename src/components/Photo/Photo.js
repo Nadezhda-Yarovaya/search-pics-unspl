@@ -18,12 +18,11 @@ export const Photo = () => {
     //const photo = data.find(item => item.id === id);   
 
     if (loading) {
-        return <Spinner />
-      
+        return (<div className="photo"><Spinner />      </div>);
     }
     if (error) {
         return (
-            <><p>Photo not found</p></>
+            <><div className="photo"><p>Photo not found</p></div></>
         );
     }
 
@@ -31,7 +30,7 @@ export const Photo = () => {
 
     return (
         <div className="photo">{" "}
-            <Link className="photo-goback" to="/">{" "}
+            <Link className="photo-goback" to="/search-pics-unspl">{" "}
                 Go Back {" "}
             </Link>{" "}
             <img className="photo-image" src={src} alt={title} />{" "}
