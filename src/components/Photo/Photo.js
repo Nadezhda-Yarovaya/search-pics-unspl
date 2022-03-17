@@ -25,7 +25,7 @@ export const Photo = () => {
     return (
       <>
         <p>Photo not found</p>
-        <a href="/">go HOME</a>
+        <a href="/search-pics-unspl">go HOME</a>
       </>
     );
   }
@@ -35,7 +35,7 @@ export const Photo = () => {
   return (
     <div className="photo">
       {' '}
-      <Link className="photo-goback" to="/">
+      <Link className="photo-goback" to="/search-pics-unspl">
         {' '}
         Go Back{' '}
       </Link>{' '}

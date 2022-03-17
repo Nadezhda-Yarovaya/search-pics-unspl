@@ -47,10 +47,10 @@ function App() {
   return (    
     <CardContext.Provider value={cards}>
     <Switch>
-    <Route path="/" exact><Main onSubmit={onSubmit} isLoading={isLoading} cards={cards}
+    <Route path="/search-pics-unspl" exact><Main onSubmit={onSubmit} isLoading={isLoading} cards={cards}
     initialValue={searchQuery}/></Route>
-    <Route path="/photos/:id"><Photo /></Route>
-    <Route path="/*">404 not found</Route>       
+    <Route path="/search-pics-unspl/photos/:id"><Photo /></Route>
+    <Route path="/search-pics-unspl/*">404 not found</Route>       
     </Switch>
     </CardContext.Provider>
 );
