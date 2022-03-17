@@ -16,7 +16,9 @@ export const Photo = () => {
   const { data, loading, error } = useApi(handler);
 
   if (loading) {
-    return <Spinner />;
+    return (
+    <><Spinner /></>
+    );
   }
 
   if (error) {
