@@ -33,14 +33,13 @@ class Api {
     }
 
 getPhotoById(id) {
-    return fetch(`${this._baseUrl}/search/photos/${id}`,
+    return fetch(`${this._baseUrl}/photos/${id}`,
     {
     headers: {
         Authorization: `Client-ID ${this._apiKey}`
-
     }
 }).then(Api.getResponse)
-.then(({results}) => results.map(Api.transformFotoData));
+.then(Api.transformFotoData);
 } /*close search function*/
 } /* close class*/
 

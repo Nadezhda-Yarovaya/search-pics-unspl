@@ -1,18 +1,19 @@
 import { useState, useEffect } from "react";
 
+/*в хук приходит функция, ее имя handler*/
 export const useApi = (handler) => {
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState();
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     setLoading(true);
-    
     handler()
       .then((result) => {
         setData(result);
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err);
         setError(true);
       })
       .finally(() => {

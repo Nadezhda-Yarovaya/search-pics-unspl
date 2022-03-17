@@ -1,21 +1,32 @@
-import { useContext } from 'react';
+import { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import { CardContext } from '../../context/CardContext';
+/*import { CardContext } from '../../context/CardContext';*/
+import {useApi} from "../../hooks/useApi";
+import api from "../../utils/Api";
 
 export const Photo = () => {
-    const photos=useContext(CardContext);
-
+    //const photos=useContext(CardContext);
     const { id } = useParams();
+    const handler = useCallback(() => {
+        return api.getPhotoById(id);
+    }, [id]);
 
-    const photo = photos.find(item => item.id === id);
-    if (!photo) {
+    const { data, loading, error } = useApi(handler);
+
+    console.log(data,loading,error);
+
+    //const photo = data.find(item => item.id === id);    now data has info on concrete card 
+    
+    /* if loading then spinner */
+
+    if (error) {
         return (
-            <><p>Photo not found</p></>
+            <><p>Photo not found</p><a href="/search-pics-unspl">go HOME</a></>
         );
     }
 
-    const { src, title, subtitle } = photo;
+    const { src, title, subtitle } = data;
 
     return (
         <div className="photo">{" "}
